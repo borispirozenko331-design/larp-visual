@@ -1,0 +1,54 @@
+/* A small set of layered movements; every decorative layer stays non-interactive. */
+.page-progress{position:fixed;z-index:90;inset:0 0 auto;height:2px;pointer-events:none}
+.page-progress span{display:block;width:100%;height:100%;transform:scaleX(var(--page-progress,0));transform-origin:left center;background:linear-gradient(90deg,#79aebf,#d7f5f2);box-shadow:0 0 14px rgba(174,225,232,.45)}
+.header-actions{display:flex;align-items:center;justify-self:end;gap:25px}
+.header-actions .header-link{justify-self:auto}
+.sound-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:5px 9px;border:1px solid rgba(185,222,232,.26);border-radius:5px;background:rgba(7,18,30,.42);color:#c5dce3;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer;transition:color .2s ease,border-color .2s ease,background .2s ease}
+.sound-toggle:hover{border-color:rgba(185,222,232,.55);background:rgba(17,40,55,.75);color:#f1fcfc}
+.sound-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sound-toggle .sound-slash,.sound-toggle[aria-pressed="false"] .sound-wave{display:none}
+.sound-toggle[aria-pressed="false"] .sound-slash{display:block}
+.hero-glow{position:absolute;inset:-20%;z-index:-2;pointer-events:none;background:radial-gradient(ellipse 36% 44% at 72% 48%,rgba(145,207,226,.19),transparent 78%);mix-blend-mode:screen;opacity:.55;transform:translate3d(calc(var(--hero-x,0px) * -.45),calc(var(--hero-y,0px) * -.5),0);animation:glow-breathe 8s ease-in-out infinite alternate}
+.hero-content .hero-actions.reveal{transition-delay:.17s}
+.hero-content .hero-lede.reveal{transition-delay:.1s}
+.button{position:relative;overflow:hidden;isolation:isolate}
+.button::after{content:"";position:absolute;z-index:-1;inset:-75% auto -75% -55%;width:38%;transform:rotate(22deg) translateX(0);background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:transform .65s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.button:hover::after,.button:focus-visible::after{transform:rotate(22deg) translateX(560%)}
+.preview-frame{position:absolute;z-index:2;inset:16px;pointer-events:none}
+.preview-frame i{position:absolute;width:27px;height:27px;border-color:rgba(216,246,247,.8);opacity:0;transition:opacity .65s ease,transform 1.2s cubic-bezier(.16,1,.3,1)}
+.preview-frame i:nth-child(1){top:0;left:0;border-top:1px solid;border-left:1px solid;transform:translate(14px,14px)}
+.preview-frame i:nth-child(2){top:0;right:0;border-top:1px solid;border-right:1px solid;transform:translate(-14px,14px)}
+.preview-frame i:nth-child(3){bottom:0;left:0;border-bottom:1px solid;border-left:1px solid;transform:translate(14px,-14px)}
+.preview-frame i:nth-child(4){bottom:0;right:0;border-bottom:1px solid;border-right:1px solid;transform:translate(-14px,-14px)}
+.visual-preview.is-visible .preview-frame i{opacity:.7;transform:none;transition-delay:.45s}
+.visual-preview.is-visible .preview-reticle{animation:reticle-breathe 5s ease-in-out 1.2s infinite}
+.visual-preview .preview-top,.visual-preview .preview-bottom,.visual-preview .preview-panel{transition:opacity .9s ease,transform 1.1s cubic-bezier(.16,1,.3,1)}
+.motion-ready .visual-preview:not(.is-visible) .preview-top{opacity:0;transform:translateY(-18px)}
+.motion-ready .visual-preview:not(.is-visible) .preview-bottom,.motion-ready .visual-preview:not(.is-visible) .preview-panel{opacity:0;transform:translateY(24px)}
+.visual-preview.is-visible .preview-top{transition-delay:.45s}
+.visual-preview.is-visible .preview-panel{transition-delay:.65s}
+.visual-preview.is-visible .preview-bottom{transition-delay:.8s}
+.visual-copy>*{transition:opacity .8s ease,transform .95s cubic-bezier(.16,1,.3,1)}
+.motion-ready .visual-copy:not(.is-visible)>*{opacity:0;transform:translateY(18px)}
+.visual-copy.is-visible>*{opacity:1;transform:none}
+.visual-copy>*:nth-child(2){transition-delay:.08s}
+.visual-copy>*:nth-child(3){transition-delay:.16s}
+.visual-copy>*:nth-child(4){transition-delay:.24s}
+.visual-copy>*:nth-child(5){transition-delay:.32s}
+.visual-copy>*:nth-child(6){transition-delay:.4s}
+.detail-card{transform-style:preserve-3d}
+.detail-card.reveal.is-visible:hover{transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-7px);box-shadow:0 28px 60px rgba(0,0,0,.3)}
+.detail-card .detail-art{transform-origin:center}
+.detail-card .detail-card-content{transform:translateZ(10px)}
+.detail-card .detail-number{transition:color .3s ease}
+.detail-card:hover .detail-number{color:#d2f4f1}
+.closing-content .reveal:nth-child(2){transition-delay:.08s}
+.closing-content .reveal:nth-child(3){transition-delay:.16s}
+.closing-content .reveal:nth-child(4){transition-delay:.24s}
+@keyframes glow-breathe{from{opacity:.38}to{opacity:.72}}
+@keyframes reticle-breathe{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.9)}50%{opacity:.85;transform:translate(-50%,-50%) scale(1.12)}}
+@media(hover:none){.detail-card.reveal.is-visible:hover{transform:none;box-shadow:none}.button::after{display:none}}
+@media(max-width:1050px){.header-actions{gap:14px}.sound-toggle{width:36px;padding:5px}.sound-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}
+@media(max-width:760px){.header-inner{grid-template-columns:1fr auto auto;gap:9px}.header-actions{grid-column:2;grid-row:1}.menu-toggle{grid-column:3;grid-row:1}.sound-toggle{width:42px;height:42px}.sound-toggle svg{width:18px;height:18px}}
+@media(max-width:760px){.hero-glow{background:radial-gradient(ellipse 55% 34% at 64% 47%,rgba(145,207,226,.14),transparent 78%)}.preview-frame{inset:11px}.preview-frame i{width:17px;height:17px}}
+@media(prefers-reduced-motion:reduce){.hero-glow,.visual-preview.is-visible .preview-reticle{animation:none!important}.hero-glow{transform:none;opacity:.5}.page-progress span,.button::after,.preview-frame i,.visual-preview .preview-top,.visual-preview .preview-bottom,.visual-preview .preview-panel,.visual-copy>*{transition:none!important}.motion-ready .visual-copy:not(.is-visible)>*,.motion-ready .visual-preview:not(.is-visible) .preview-top,.motion-ready .visual-preview:not(.is-visible) .preview-bottom,.motion-ready .visual-preview:not(.is-visible) .preview-panel{opacity:1;transform:none}.detail-card.reveal.is-visible:hover{transform:none}.button::after{display:none}}

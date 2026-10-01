@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://borispirozenko331-design.github.io/larp-visual/sitemap.xml
